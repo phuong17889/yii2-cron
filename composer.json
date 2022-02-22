@@ -1,5 +1,5 @@
 {
-    "name": "yiicod/yii2-cron",
+    "name": "phuong17889/yii2-cron",
     "description": "Auto block|unblock console command for the Yii2. One command without duplicate.",
     "type": "yii2-extension",
     "license": "MIT",
@@ -8,11 +8,17 @@
             "name": "Alexey Orlov",
             "email": "aaorlov88@gmail.com",
             "role": "Developer"
+        },
+        {
+            "name": "Le Phuong",
+            "email": "phuong17889@gmail.com",
+            "role": "Developer"
         }
     ],
     "require": {
+        "php": ">=7",
         "yiisoft/yii2": "2.*",
-        "php": ">=7"
+        "phuong17889/yii2-base": "*"
     },
     "repositories": [
         {
@@ -22,7 +28,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "yiicod\\cron\\": "/"
+            "phuong17889\\cron\\": "/"
         }
     }
 }

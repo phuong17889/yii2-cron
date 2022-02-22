@@ -1,17 +1,18 @@
 <?php
 
-namespace yiicod\cron\commands\traits;
+namespace phuong17889\cron\traits;
 
 use Exception;
 use Yii;
-use yiicod\cron\commands\exceptions\IsNotRunningException;
-use yiicod\cron\commands\exceptions\IsRunningException;
-use yiicod\cron\commands\FileOutput;
+use phuong17889\cron\exceptions\IsNotRunningException;
+use phuong17889\cron\exceptions\IsRunningException;
+use phuong17889\cron\helpers\FileOutput;
+use yii\base\InvalidConfigException;
 
 /**
  * Trait DaemonTrait
  *
- * @package yiicod\cron\commands\traits
+ * @package phuong17889\cron\commands\traits
  */
 trait DaemonTrait
 {
@@ -26,7 +27,7 @@ trait DaemonTrait
     public $db;
 
     /**
-     * @var int
+     * @var int microsecond delay time
      */
     public $daemonDelay = 15;
 
@@ -46,6 +47,7 @@ trait DaemonTrait
      * Reload daemon
      *
      * @param callable $worker
+     * @throws Exception
      */
     protected function restartDaemon(callable $worker)
     {
@@ -89,7 +91,7 @@ trait DaemonTrait
 	            }
                 // Start daemon method
                 call_user_func($worker);
-                sleep($this->daemonDelay);
+                usleep($this->daemonDelay);
             }
         }
     }
@@ -188,7 +190,8 @@ trait DaemonTrait
     /**
      * Set pids
      *
-     * @return @void
+     * @param array $pids
+     * @void
      */
     protected function setPids(array $pids)
     {
@@ -231,7 +234,9 @@ trait DaemonTrait
     }
 
     /**
+     * @param $text
      * @return FileOutput
+     * @throws InvalidConfigException
      */
     protected function output($text)
     {

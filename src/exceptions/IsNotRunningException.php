@@ -1,6 +1,6 @@
 <?php
 
-namespace yiicod\cron\commands\exceptions;
+namespace phuong17889\cron\exceptions;
 
 use Exception;
 

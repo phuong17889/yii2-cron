@@ -1,19 +1,21 @@
 <?php
 
-namespace yiicod\cron\commands;
+namespace phuong17889\cron\commands;
 
+use Exception;
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\console\Controller;
 use yii\helpers\Console;
-use yiicod\cron\commands\exceptions\IsNotRunningException;
-use yiicod\cron\commands\exceptions\IsRunningException;
-use yiicod\cron\commands\traits\DaemonTrait;
+use phuong17889\cron\exceptions\IsNotRunningException;
+use phuong17889\cron\exceptions\IsRunningException;
+use phuong17889\cron\traits\DaemonTrait;
 
 /**
  * Class DaemonController
  * Daemon controller for console
  *
- * @package yiicod\cron\commands
+ * @package phuong17889\cron\commands
  */
 abstract class DaemonController extends Controller
 {
@@ -24,6 +26,9 @@ abstract class DaemonController extends Controller
      */
     public $defaultAction = 'start';
 
+    /**
+     * @throws InvalidConfigException
+     */
     public function beforeAction($action)
     {
         // Push each log message to related log target
@@ -43,7 +48,8 @@ abstract class DaemonController extends Controller
     /**
      * Default action. Starts daemon.
      *
-     * @return mixed|void
+     * @return void
+     * @throws Exception
      */
     public function actionStart()
     {
@@ -57,6 +63,7 @@ abstract class DaemonController extends Controller
 
     /**
      * Restart daemon.
+     * @throws Exception
      */
     public function actionRestart()
     {
@@ -71,7 +78,8 @@ abstract class DaemonController extends Controller
     /**
      * Stops daemon.
      *
-     * @return mixed|void
+     * @return void
+     * @throws Exception
      */
     public function actionStop()
     {
