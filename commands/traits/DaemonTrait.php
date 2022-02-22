@@ -16,6 +16,16 @@ use yiicod\cron\commands\FileOutput;
 trait DaemonTrait
 {
     /**
+     * @var bool re-open sql connection while run daemon
+     */
+    public $restartDb = false;
+
+    /**
+     * @var string the db name, which will be re-opened
+     */
+    public $db;
+
+    /**
      * @var int
      */
     public $daemonDelay = 15;
@@ -72,6 +82,11 @@ trait DaemonTrait
             // Automatically send every new message to available log routes
             Yii::getLogger()->flushInterval = 1;
             while (true) {
+                if ($this->restartDb) {
+		            $db = $this->db;
+		            Yii::$app->$db->close();
+		            Yii::$app->$db->open();
+	            }
                 // Start daemon method
                 call_user_func($worker);
                 sleep($this->daemonDelay);
