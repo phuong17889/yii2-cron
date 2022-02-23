@@ -28,7 +28,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "phuong17889\\cron\\": "/"
+            "phuong17889\\cron\\": "/src"
         }
     }
 }
