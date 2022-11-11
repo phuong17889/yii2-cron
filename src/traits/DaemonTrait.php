@@ -68,7 +68,7 @@ trait DaemonTrait
      */
     protected function startDaemon(callable $worker)
     {
-        if (!$this->isAlreadyRunning()) {
+        if ($this->isAlreadyRunning()) {
             throw new IsRunningException(sprintf('[%s] is running already.', $this->daemonName()));
         } else {
             $pid = pcntl_fork();
