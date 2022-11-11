@@ -24,7 +24,7 @@ trait DaemonTrait
     /**
      * @var string the db name, which will be re-opened
      */
-    public $db;
+    public $db = 'db';
 
     /**
      * @var int microsecond delay time
@@ -68,7 +68,7 @@ trait DaemonTrait
      */
     protected function startDaemon(callable $worker)
     {
-        if (true === $this->isAlreadyRunning()) {
+        if ($this->isAlreadyRunning()) {
             throw new IsRunningException(sprintf('[%s] is running already.', $this->daemonName()));
         } else {
             $pid = pcntl_fork();
@@ -103,7 +103,7 @@ trait DaemonTrait
      */
     protected function stopDaemon()
     {
-        if (false === $this->isAlreadyRunning()) {
+        if ($this->isAlreadyRunning()) {
             throw new IsNotRunningException(sprintf('[%s] is not running.', $this->daemonName()));
         }
         if (file_exists($this->getPidsFilePath())) {
@@ -157,8 +157,6 @@ trait DaemonTrait
      */
     protected function removePid($pid)
     {
-        $pids = $this->getPids();
-
         // Remove all process
         $children[] = $pid;
         while ($child = exec('pgrep -P ' . reset($children))) {
@@ -168,7 +166,7 @@ trait DaemonTrait
             exec("kill $child 2> /dev/null");
         }
 
-        $pids = array_diff($pids, [$pid]);
+        $pids = array_diff($this->getPids(), [$pid]);
         $this->setPids($pids);
     }
 
@@ -228,14 +226,18 @@ trait DaemonTrait
         return $path . '/' . $file;
     }
 
-    protected function getDaemonDirPath(): string
+	/**
+	 * @return string
+	 */
+	protected function getDaemonDirPath(): string
     {
         return Yii::$app->basePath . '/runtime/daemons/' . strtolower($this->daemonName());
     }
 
     /**
      * @param $text
-     * @return FileOutput
+     *
+     * @return void
      * @throws InvalidConfigException
      */
     protected function output($text)

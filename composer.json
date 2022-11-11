@@ -17,9 +17,10 @@
     ],
     "require": {
         "php": ">=7",
+        "ext-pcntl" : "*",
         "yiisoft/yii2": "2.*",
         "phuong17889/yii2-base": "*"
-    },
+	},
     "repositories": [
         {
             "type": "composer",
