@@ -1,18 +1,18 @@
 <?php
 
-namespace phuong17889\cron\traits;
+namespace phuongdev89\cron\traits;
 
 use Exception;
 use Yii;
-use phuong17889\cron\exceptions\IsNotRunningException;
-use phuong17889\cron\exceptions\IsRunningException;
-use phuong17889\cron\helpers\FileOutput;
+use phuongdev89\cron\exceptions\IsNotRunningException;
+use phuongdev89\cron\exceptions\IsRunningException;
+use phuongdev89\cron\helpers\FileOutput;
 use yii\base\InvalidConfigException;
 
 /**
  * Trait DaemonTrait
  *
- * @package phuong17889\cron\commands\traits
+ * @package phuongdev89\cron\commands\traits
  */
 trait DaemonTrait
 {

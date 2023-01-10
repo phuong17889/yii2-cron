@@ -6,7 +6,7 @@
  * @license http://www.yiiframework.com/license/
  */
 
-namespace phuong17889\cron\helpers;
+namespace phuongdev89\cron\helpers;
 
 use yii\base\InvalidConfigException;
 

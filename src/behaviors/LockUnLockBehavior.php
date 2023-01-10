@@ -1,6 +1,6 @@
 <?php
 
-namespace phuong17889\cron\behaviors;
+namespace phuongdev89\cron\behaviors;
 
 use Yii;
 use yii\base\Behavior;

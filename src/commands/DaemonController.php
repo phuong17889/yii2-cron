@@ -1,21 +1,21 @@
 <?php
 
-namespace phuong17889\cron\commands;
+namespace phuongdev89\cron\commands;
 
 use Exception;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\console\Controller;
 use yii\helpers\Console;
-use phuong17889\cron\exceptions\IsNotRunningException;
-use phuong17889\cron\exceptions\IsRunningException;
-use phuong17889\cron\traits\DaemonTrait;
+use phuongdev89\cron\exceptions\IsNotRunningException;
+use phuongdev89\cron\exceptions\IsRunningException;
+use phuongdev89\cron\traits\DaemonTrait;
 
 /**
  * Class DaemonController
  * Daemon controller for console
  *
- * @package phuong17889\cron\commands
+ * @package phuongdev89\cron\commands
  */
 abstract class DaemonController extends Controller
 {

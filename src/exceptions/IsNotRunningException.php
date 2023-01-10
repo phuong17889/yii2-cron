@@ -1,6 +1,6 @@
 <?php
 
-namespace phuong17889\cron\exceptions;
+namespace phuongdev89\cron\exceptions;
 
 use Exception;
 
