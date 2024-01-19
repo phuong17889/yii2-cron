@@ -59,3 +59,8 @@ Restart repeat function
 ```
 php yii awesome/restart
 ```
+
+Add to crontab:
+```
+* * * * * php yii awsome/start
+```
