@@ -6,25 +6,26 @@ Yii Cron extension
 Provide a logic and functionality to block console commands until they execute. 
 Unlocks commands exhibited at the expiration of the block if the server is down.
 
-#### Usage
-```php
-public function behaviors()
-{
-    return array(
-        'LockUnLockBehavior' => array(
-            'class' => 'phuongdev89\cron\commands\behaviors\LockUnLockBehavior',
-            'timeLock' => 0 //Set time lock duration for command in seconds
-        )
-    );
-}
-```
+## Install
 
+```
+composer require phuongdev89/yii2-cron
+```
+## Usage
+
+### Code
 Any command can be converted to daemon
 ```php
-class AwesomeCommand extends DaemonController
+class AwesomeController extends \phuongdev89\cron\commands\DaemonController
 {
+    public $restartDb = false; //restart db connection every run, default is `false`
+
+    public $db = 'db'; //name of db component need to restart, `db` that mean `Yii::$app->db`, default is `db`
+
+    public $daemonDelay = 15; //delay time between run, in microsecond, default is `15`
+
     /**
-     * Daemon name
+     * Daemon name, unique
      *
      * @return string
      */
@@ -34,11 +35,27 @@ class AwesomeCommand extends DaemonController
     }
 
     /**
-     * Run send mail
+     * repeatable function
      */
     public function worker()
     {
         // Some logic that will be repeateble 
     }
 }
+```
+### Command
+
+Start repeat function
+```
+php yii awesome/start
+```
+
+Stop repeat function
+```
+php yii awesome/stop
+```
+
+Restart repeat function
+```
+php yii awesome/restart
 ```
